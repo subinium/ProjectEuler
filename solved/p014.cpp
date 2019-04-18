@@ -1,28 +1,28 @@
-#include <stdio.h>
-#define ll long long
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
-int arr[10000000]={0,1};
+const int MAXN = 1e6;
 
-int doit(ll n){
-    if(n<10000000&&arr[n]) return arr[n];
-    if(n%2==0){
-        return 1+doit(n/2);
-    }
-    else{
-        return 1+doit(3*n+1);
-    }
+int dp[MAXN+5];
+map<ll, int> dp2;
 
+int f(ll ith){
+    int &ret = ith > MAXN ? dp2[ith] : dp[ith];
+    if(ret) return ret;
+    if(ith&1) return ret = f(ith*3+1)+1;
+    return ret = f(ith/2)+1;
 }
 
 int main(){
-    int maxlen = 0;
-    int flag = 0;
-    for(ll i = 1 ; i <= 1000000; i++){
-        arr[i] = doit(i);
-        if(maxlen<arr[i]){
-            maxlen = arr[i];
-            flag = i;
+    dp[1] = 1;
+    int mi = 0;
+    for(ll i = 2 ; i <= MAXN ; i++){
+        dp[i] = f(i);
+        if(dp[i] > dp[mi]){
+            mi = i;
         }
     }
-    printf("%d",flag);
+    cout << mi << endl;
+    cout << dp[mi] << endl;
 }

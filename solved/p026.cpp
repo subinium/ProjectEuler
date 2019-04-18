@@ -28,3 +28,47 @@ int main(){
     }
     cout << ans;
 }
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+int f(int n){
+    while(n%2==0) n/=2;
+    while(n%5==0) n/=5;
+    vector<int> v(n);
+    int st = 1;
+    v[st] = 1;
+    for(int i = 2; ; i++){
+        st = st*10%n;
+        if(v[st]){
+            return i - v[st];
+        }
+        v[st] = i;
+    }
+}
+
+int f2(int n){
+    while(n%2==0) n/=2;
+    while(n%5==0) n/=5;
+    int st = 9;
+    for(int i = 0 ; ; i++){
+        if(st==0) return i;
+        st = (st*10+9)%n;
+    }
+}
+
+
+int main(){
+    int mxlen = -1, ans = 0;
+    for(int i = 1 ; i <= 1000 ; i++){
+        int l = f2(i);
+        if(mxlen < l){
+            mxlen = l;
+            ans = i;
+        }
+    }
+    cout << ans;
+}
+
+*/
